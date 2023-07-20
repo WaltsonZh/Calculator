@@ -1,0 +1,30 @@
+body{
+    background-color: black;
+}
+
+#title{
+    color: white;
+}
+
+button{
+    border: 0;
+    font-size: 35px;
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    margin: 6px;
+}
+
+#zero{
+    width: 174px;
+    padding-right: 96px;
+}
+
+#input{
+    color: white;
+    font-size: 110px;
+    text-align: right;
+    padding-top: 100px;
+    width: 350px;
+    height: 100px;
+}
