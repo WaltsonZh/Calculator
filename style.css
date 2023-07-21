@@ -24,8 +24,9 @@ button{
 }
 
 #panel{
-    width: 500px;
+    width: 381px;
     margin: auto;
+    padding: 10px;
     background-color: black;
 }
 
