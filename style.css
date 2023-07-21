@@ -10,7 +10,9 @@ body{
 
 button{
     border: 0;
-    font-size: 35px;
+    font-size: 45px;
+    font-family: openSans;
+    font-weight: 600;
     width: 80px;
     height: 80px;
     border-radius: 40px;
@@ -22,6 +24,8 @@ button{
 }
 
 #panel{
+    width: 500px;
+    margin: auto;
     background-color: black;
 }
 
@@ -35,7 +39,7 @@ button{
     color: white;
     font-size: 90px;
     text-align: right;
-    padding-top: 100px;
+    padding-top: 150px;
     width: 360px;
     height: 100px;
 }
