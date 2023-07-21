@@ -1,9 +1,11 @@
-body{
-    background-color: black;
+@font-face {
+    font-family: openSans;
+    src: url(fonts/OpenSans-Light.ttf);
 }
 
-#title{
-    color: white;
+body{
+    background-color: rgb(69, 69, 69);
+    font-family: openSans;
 }
 
 button{
@@ -15,16 +17,25 @@ button{
     margin: 6px;
 }
 
+#title{
+    color: white;
+}
+
+#panel{
+    background-color: black;
+}
+
 #zero{
     width: 174px;
     padding-right: 96px;
 }
 
 #input{
+    background-color: rgb(42, 42, 42);
     color: white;
-    font-size: 110px;
+    font-size: 90px;
     text-align: right;
     padding-top: 100px;
-    width: 350px;
+    width: 360px;
     height: 100px;
 }
