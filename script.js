@@ -121,7 +121,9 @@ function number(num) {
     if (str == "" && num == ".") {
         input.textContent = "0.";
     } else {
-        input.textContent = str + num;
+        str += num;
+        str = str.replace(/,/g, '');
+        input.textContent = Number(str).toLocaleString('en-US');
     }
 
 	if (num != 0) {
@@ -133,9 +135,9 @@ function number(num) {
 
 function operation(op) {
     if (op_selector == 0 || next_operand) {
-        x = Number(input.textContent);
+        x = Number(input.textContent.replace(/,/g, ''));
     } else {
-        y = Number(input.textContent);
+        y = Number(input.textContent.replace(/,/g, ""));
     }
 
     if (op_selector != op && !next_operand) {
@@ -183,6 +185,6 @@ function format(num) {
             str = str.substring(0, 15);
         }
 
-        return str;
+        return Number(str).toLocaleString('en-US');
     }
 }
