@@ -10,13 +10,27 @@ body{
 
 button{
     border: 0;
-    font-size: 45px;
+    font-size: 40px;
     font-family: openSans;
     font-weight: 600;
     width: 80px;
     height: 80px;
     border-radius: 40px;
     margin: 6px;
+}
+
+.lightgreybtn{
+    background-color: rgb(161, 161, 161);
+}
+
+.darkgreybtn{
+    background-color: rgb(58, 58, 58);
+    color: white;
+}
+
+.orangebtn{
+    background-color: orange;
+    color: white;
 }
 
 #title{
@@ -26,8 +40,11 @@ button{
 #panel{
     width: 381px;
     margin: auto;
-    padding: 10px;
+    padding-inline: 10px;
+    padding-top: 50px;
+    padding-bottom: 65px;
     background-color: black;
+    border-radius: 55px;
 }
 
 #zero{
