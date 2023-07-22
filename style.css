@@ -39,7 +39,7 @@ button{
 
 #panel{
     width: 381px;
-    margin: auto;
+    margin: 0 auto;
     padding-inline: 10px;
     padding-top: 50px;
     padding-bottom: 65px;
@@ -53,6 +53,9 @@ button{
 }
 
 #input{
+    display: table-cell;
+    vertical-align: bottom;
+    background-color: rgb(0, 0, 0);
     color: white;
     font-size: 90px;
     text-align: right;

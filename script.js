@@ -64,18 +64,21 @@ nine.addEventListener("click", () => {
 	number(9);
 });
 dot.addEventListener("click", () => {
-    number(".");
+	number(".");
 });
-
 
 // ac button event
 AC_btn.addEventListener("click", () => {
-	if (AC == false && C == false) { // C 
+	if (AC == false && C == false) {
+		// C
 		input.textContent = 0;
+		input.style.fontSize = "90px";
+        input.style.paddingTop = "150px";
 		y = NaN;
 		C = true;
-        AC_btn.textContent = "AC";
-	} else if (AC == false && C == true) { // AC 
+		AC_btn.textContent = "AC";
+	} else if (AC == false && C == true) {
+		// AC
 		x = 0;
 		y = NaN;
 		AC = true;
@@ -87,44 +90,57 @@ plus.addEventListener("click", () => {
 	operation(1);
 });
 minus.addEventListener("click", () => {
-    operation(2);
+	operation(2);
 });
 multiply.addEventListener("click", () => {
-    operation(3);
+	operation(3);
 });
 divide.addEventListener("click", () => {
-    operation(4);
+	operation(4);
 });
 equal.addEventListener("click", () => {
-    operation(0);
+	operation(0);
 });
 
 negate.addEventListener("click", () => {
-    let tmp = Number(input.textContent);
-    tmp *= -1;
-    input.textContent = tmp;
+	let tmp = input.textContent;
+	if (tmp.charAt(0) != "-" && tmp != "0") {
+		tmp = "-" + tmp;
+	} else if (tmp != "0") {
+		tmp = tmp.substring(1);
+	}
+	input.textContent = tmp;
 });
 
 percent.addEventListener("click", () => {
-    let tmp = Number(input.textContent);
-    tmp *= 0.01;
-    input.textContent = tmp;
+	let tmp = input.textContent;
+    let num = Number(tmp.replace(/,/g, ""));
+	num *= 0.01;
+	input.textContent = formatnum(num);
 });
 
 function number(num) {
 	let str = input.textContent;
+
 	if (str == "0" || next_operand) {
 		str = "";
-        next_operand = false;
+		next_operand = false;
 	}
 
-    if (str == "" && num == ".") {
-        input.textContent = "0.";
-    } else {
-        str += num;
-        str = str.replace(/,/g, '');
-        input.textContent = Number(str).toLocaleString('en-US');
+    if (str.indexOf('.') != -1 && num == '.') {
+        num = '';
     }
+
+    str = str.replace(/,/g, "") + num;
+    if (str.length > 12){
+        return;
+    }
+
+	if (str == ".") {
+		input.textContent = "0.";
+	} else {
+		input.textContent = formatString(str);
+	}
 
 	if (num != 0) {
 		AC = false;
@@ -134,57 +150,89 @@ function number(num) {
 }
 
 function operation(op) {
-    if (op_selector == 0 || next_operand) {
-        x = Number(input.textContent.replace(/,/g, ''));
-    } else {
-        y = Number(input.textContent.replace(/,/g, ""));
-    }
+	if (op_selector == 0 || next_operand) {
+		x = Number(input.textContent.replace(/,/g, ""));
+	} else {
+		y = Number(input.textContent.replace(/,/g, ""));
+	}
 
-    if (op_selector != op && !next_operand) {
+	if (!next_operand) {
 		result();
 		AC = false;
 		C = false;
 		AC_btn.textContent = "C";
-		
 	}
-    op_selector = op;
-    next_operand = true;
+	op_selector = op;
+	next_operand = true;
 }
 
 function result() {
-    switch (op_selector) {
-        case 1:
-            x += y;
-            break;
-        case 2:
-            x -= y;
-            break;
-        case 3:
-            x *= y;
-            break;
-        case 4:
-            x /= y;
-            break;
-        default:
-            break;
-    }
-    if (x == NaN || x == Infinity) {
-        input.textContent = x;
+	switch (op_selector) {
+		case 1:
+			x += y;
+			break;
+		case 2:
+			x -= y;
+			break;
+		case 3:
+			x *= y;
+			break;
+		case 4:
+			x /= y;
+			break;
+		default:
+			break;
+	}
+	if (x == NaN || x == Infinity) {
+		input.textContent = "Error";
+		input.style.fontSize = "90px";
+        input.style.paddingTop = "150px";
+	} else {
+		input.textContent = formatnum(x);
+	}
+}
+
+function formatnum(num) {
+    if (num >= 1000000000000) {
+        input.style.fontSize = "90px";
+		input.style.paddingTop = "150px";
+        return "Error";
     } else {
-        input.textContent = format(x);
+        let str = parseFloat(num.toFixed(13)).toString();
+
+	    if (str.length > 13) {
+	    	str = str.substring(0, 13);
+	    }
+
+	    if (Number(str.slice(str.indexOf("."))) == 0 && str.indexOf(".") != -1) {
+	    	str = "0";
+	    }
+
+        return formatString(str);
     }
 }
 
-function format(num) {
-    if (num >= 1000000000000000) {
-        return "Infinity";
+function formatString(str) {
+	if (str.length < 7) {
+		input.style.fontSize = "90px";
+        input.style.paddingTop = "150px";
+	} else if (str.length < 10) {
+		input.style.fontSize = 120 - str.length * 7 + "px";
+        input.style.paddingTop = "172px";
+	} else {
+        input.style.fontSize = 90 - str.length * 4 + "px";
+        input.style.paddingTop = "172px";
     }
-    if (num < 1000000000000000) {
-        let str = parseFloat(num.toFixed(15)).toString();
-        if (str.length > 15) {
-            str = str.substring(0, 15);
-        }
 
-        return Number(str).toLocaleString('en-US');
-    }
+	let dec = str.indexOf(".");
+	if (dec == -1) {
+		dec = str.length;
+	}
+    let neg = str.indexOf("-");
+
+	for (let i = dec - 3; i > neg + 1; i -= 3) {
+		str = str.slice(0, i) + "," + str.slice(i);
+	}
+
+	return str;
 }
