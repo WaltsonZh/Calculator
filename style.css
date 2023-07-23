@@ -62,13 +62,16 @@ button{
 }
 
 #panel{
+    background-image: url(images/IPhone_frame.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-size: cover;
     width: 381px;
     margin: 0 auto;
-    padding-inline: 10px;
+    padding-inline: 25px;
     padding-top: 50px;
     padding-bottom: 65px;
-    background-color: black;
-    border-radius: 55px;
+    border-radius: 70px;
 }
 
 #zero{
