@@ -20,17 +20,41 @@ button{
 }
 
 .lightgreybtn{
-    background-color: rgb(161, 161, 161);
+    background-color: hsl(0, 0%, 63%);
+}
+
+.lightgreybtn:hover{
+    background-color: hsl(0, 0%, 73%);
+}
+
+.lightgreybtn:active{
+    background-color: hsl(0, 0%, 53%);
 }
 
 .darkgreybtn{
-    background-color: rgb(58, 58, 58);
+    background-color: hsl(0, 0%, 23%);
     color: white;
 }
 
+.darkgreybtn:hover{
+    background-color: hsl(0, 0%, 28%);
+}
+
+.darkgreybtn:active{
+    background-color: hsl(0, 0%, 18%);
+}
+
 .orangebtn{
-    background-color: orange;
+    background-color: hsl(39, 100%, 50%);
     color: white;
+}
+
+.orangebtn:hover{
+    background-color: hsl(39, 100%, 60%);
+}
+
+.orangebtn:active{
+    background-color: hsl(39, 100%, 40%);
 }
 
 #title{
