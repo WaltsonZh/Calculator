@@ -1,5 +1,11 @@
-const input = document.getElementById("input");
+/* 
+    Author: WaltsonZh
+    File: script.js
+    Description: 
+*/
 
+// Get references to the HTML elements
+const input = document.getElementById("input");
 const zero = document.getElementById("zero");
 const one = document.getElementById("one");
 const two = document.getElementById("two");
@@ -11,28 +17,24 @@ const seven = document.getElementById("seven");
 const eight = document.getElementById("eight");
 const nine = document.getElementById("nine");
 const dot = document.getElementById("dot");
-
 const AC_btn = document.getElementById("reset");
-
 const plus = document.getElementById("plus");
 const minus = document.getElementById("minus");
 const multiply = document.getElementById("multiply");
 const divide = document.getElementById("divide");
 const equal = document.getElementById("equal");
-
 const negate = document.getElementById("negate");
 const percent = document.getElementById("percent");
 
-// oprends
-let x = 0;
-let y = NaN;
+// Initialize variables
+let x = 0; // First operand
+let y = NaN; // Second operand
+let AC = true; // All clear flag
+let C = true; // Clear flag
+let op_selector = 0; // Operation selector (0 = no operation, 1 = plus, 2 = minus, 3 = multiply, 4 = divede)
+let next_operand = false; // Flag to indicate if the next input should be treated as a new operand
 
-let AC = true; // all clear
-let C = true; // clear
-let op_selector = 0; // operation selector (0 = no operation, 1 = plus, 2 = minus, 3 = multiply, 4 = divede)
-let next_operand = false;
-
-// number buttons' events
+// Event listeners to number buttons (0-9) and dot
 zero.addEventListener("click", () => {
 	number(0);
 });
@@ -67,25 +69,26 @@ dot.addEventListener("click", () => {
 	number(".");
 });
 
-// ac button event
+// All clear button event
 AC_btn.addEventListener("click", () => {
 	if (AC == false && C == false) {
-		// C
+		// If clear mode is active
 		input.textContent = 0;
 		input.style.fontSize = "90px";
-        input.style.paddingTop = "150px";
+        	input.style.paddingTop = "150px";
 		y = NaN;
 		C = true;
 		AC_btn.textContent = "AC";
 	} else if (AC == false && C == true) {
-		// AC
+		// If all clear mode is active
 		x = 0;
 		y = NaN;
 		AC = true;
 	}
 });
 
-// operation events
+
+// Event listeners to operation buttons (plus, minus, multiply, divide, equal)
 plus.addEventListener("click", () => {
 	operation(1);
 });
@@ -102,6 +105,7 @@ equal.addEventListener("click", () => {
 	operation(0);
 });
 
+// Event listeners to the "negate" and "percent" buttons
 negate.addEventListener("click", () => {
 	let tmp = input.textContent;
 	if (tmp.charAt(0) != "-" && tmp != "0") {
@@ -119,16 +123,17 @@ percent.addEventListener("click", () => {
 	input.textContent = formatnum(num);
 });
 
+// Function to handle number button clicks
 function number(num) {
 	let str = input.textContent;
 
 	if (str == "0" || next_operand) {
-		str = "";
+		str = ""; // Clear the input if it's 0 or the next operand is expected
 		next_operand = false;
 	}
 
     if (str.indexOf('.') != -1 && num == '.') {
-        num = '';
+        num = ''; // If a dot already exists, ignore further dots
     }
 
     str = str.replace(/,/g, "") + num;
@@ -137,7 +142,7 @@ function number(num) {
     }
 
 	if (str == ".") {
-		input.textContent = "0.";
+		input.textContent = "0."; // If the input is just a dot, display "0."
 	} else {
 		input.textContent = formatString(str);
 	}
@@ -149,6 +154,7 @@ function number(num) {
 	}
 }
 
+// Function to handle operation button clicks
 function operation(op) {
 	if (op_selector == 0 || next_operand) {
 		x = Number(input.textContent.replace(/,/g, ""));
@@ -156,7 +162,7 @@ function operation(op) {
 		y = Number(input.textContent.replace(/,/g, ""));
 	}
 
-	if (!next_operand) {
+	if (!next_operand) { // If next_operand is false, calculate the result of the ongoing operation (if any)
 		result();
 		AC = false;
 		C = false;
@@ -166,6 +172,7 @@ function operation(op) {
 	next_operand = true;
 }
 
+// Function to calculate and display the result of the ongoing operation
 function result() {
 	switch (op_selector) {
 		case 1:
@@ -192,6 +199,7 @@ function result() {
 	}
 }
 
+// Function to format a number with commas for thousands separation
 function formatnum(num) {
     if (num >= 1000000000000) {
         input.style.fontSize = "90px";
@@ -212,6 +220,7 @@ function formatnum(num) {
     }
 }
 
+// Function to format the input display based on the length of the input
 function formatString(str) {
 	if (str.length < 7) {
 		input.style.fontSize = "90px";
