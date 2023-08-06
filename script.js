@@ -77,7 +77,7 @@ AC_btn.addEventListener("click", () => {
 		// If clear mode is active
 		input.textContent = 0;
 		input.style.fontSize = "90px";
-        	input.style.paddingTop = "150px";
+        input.style.paddingTop = "150px";
 		y = NaN;
 		C = true;
 		AC_btn.textContent = "AC";
