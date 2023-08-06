@@ -2,6 +2,8 @@
     Author: WaltsonZh
     File: script.js
     Description: 
+    	This JavaScript file contains the implementation of a basic calculator for performing arithmetic operations.
+		It provides functionality for handling numbers, addition, subtraction, multiplication, division, percentage, negation, and input formatting for display.
 */
 
 // Get references to the HTML elements
