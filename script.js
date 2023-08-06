@@ -239,7 +239,7 @@ function formatString(str) {
 	if (dec == -1) {
 		dec = str.length;
 	}
-    	let neg = str.indexOf("-");
+        let neg = str.indexOf("-");
 
 	for (let i = dec - 3; i > neg + 1; i -= 3) {
 		str = str.slice(0, i) + "," + str.slice(i);
