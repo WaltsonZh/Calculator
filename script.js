@@ -2,8 +2,8 @@
     Author: WaltsonZh
     File: script.js
     Description: 
-    This JavaScript file contains the implementation of a basic calculator for performing arithmetic operations.
-    It provides functionality for handling numbers, addition, subtraction, multiplication, division, percentage, negation, and input formatting for display.
+        This JavaScript file contains the implementation of a basic calculator for performing arithmetic operations.
+        It provides functionality for handling numbers, addition, subtraction, multiplication, division, percentage, negation, and input formatting for display.
 */
 
 // Get references to the HTML elements
@@ -120,7 +120,7 @@ negate.addEventListener("click", () => {
 
 percent.addEventListener("click", () => {
 	let tmp = input.textContent;
-    let num = Number(tmp.replace(/,/g, ""));
+        let num = Number(tmp.replace(/,/g, ""));
 	num *= 0.01;
 	input.textContent = formatnum(num);
 });
@@ -195,7 +195,7 @@ function result() {
 	if (x == NaN || x == Infinity) {
 		input.textContent = "Error";
 		input.style.fontSize = "90px";
-        input.style.paddingTop = "150px";
+                input.style.paddingTop = "150px";
 	} else {
 		input.textContent = formatnum(x);
 	}
@@ -205,7 +205,7 @@ function result() {
 function formatnum(num) {
     if (num >= 1000000000000) {
         input.style.fontSize = "90px";
-		input.style.paddingTop = "150px";
+	input.style.paddingTop = "150px";
         return "Error";
     } else {
         let str = parseFloat(num.toFixed(13)).toString();
